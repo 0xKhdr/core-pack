@@ -1,5 +1,5 @@
 {
-    "name": "raid/microservice-core",
+    "name": "raid/core-pack",
     "description": "Raid Microservice Core Package",
     "type": "library",
     "license": "MIT",
