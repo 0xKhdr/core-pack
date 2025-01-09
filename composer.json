@@ -1,0 +1,38 @@
+{
+    "name": "raid/microservice-core",
+    "description": "Raid Microservice Core Package",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohamed Khedr",
+            "email": "mohamedkhedr700@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.31",
+        "mateusjunges/laravel-kafka": "^2.4"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Raid\\Core\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Raid\\Core\\Providers\\CoreServiceProvider"
+            ]
+        }
+    },
+    "aliases": {},
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

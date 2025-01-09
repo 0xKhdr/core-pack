@@ -1,0 +1,7 @@
+/.idea
+/.vscode
+/vendor
+/composer.lock
+/compose
+/docker-compose.yml
+/.env
