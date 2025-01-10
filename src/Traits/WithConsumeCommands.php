@@ -12,7 +12,8 @@ trait WithConsumeCommands
     protected function init(): void
     {
         $this->info(sprintf(
-            'Init '.static::class.' with message: %s',
+            '[%s]: Init '.static::class.' with message: %s',
+            now()->toDateTimeString(),
             $this->getMessage(),
         ));
 
