@@ -3,7 +3,6 @@
 namespace Raid\Core\Traits;
 
 use Junges\Kafka\Contracts\ConsumerMessage;
-use function App\Traits\data_get;
 
 trait WithConsumeEvents
 {

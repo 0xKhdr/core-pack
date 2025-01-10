@@ -6,19 +6,18 @@ use App\Services\KafkaService;
 use Carbon\Exceptions\Exception;
 use Junges\Kafka\Contracts\ConsumerMessage;
 use Junges\Kafka\Exceptions\ConsumerException;
-use function App\Traits\data_get;
-use function App\Traits\event;
 
 trait WithConsumeCommands
 {
-    protected function started(string $command): void
+    protected function init(): void
     {
-        $this->info(sprintf('Starting command: %s', $command));
+        $this->info($this->getMessage());
     }
 
     protected function consume(string $topic, string $event): void
     {
         try {
+            $this->init();
             $this->consumeTopic($topic, $event);
 
         } catch (Exception|ConsumerException $e) {
@@ -29,7 +28,7 @@ trait WithConsumeCommands
     /**
      * @throws Exception|ConsumerException
      */
-    protected function consumeTopic(string $topic, string $event): void
+    private function consumeTopic(string $topic, string $event): void
     {
         KafkaService::new()->consume(
             [$topic],
@@ -37,7 +36,7 @@ trait WithConsumeCommands
                 event(new $event($message));
 
                 $this->finished(data_get($message->getBody(), 'postId'));
-        });
+            });
     }
 
     protected function finished(string $postId): void

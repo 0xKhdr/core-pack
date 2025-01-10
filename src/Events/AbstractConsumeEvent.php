@@ -11,6 +11,6 @@ abstract class AbstractConsumeEvent implements ConsumeEvent
     use WithConsumeEvents;
 
     public function __construct(
-        private ConsumerMessage $message,
+        private readonly ConsumerMessage $message,
     ) {}
 }
