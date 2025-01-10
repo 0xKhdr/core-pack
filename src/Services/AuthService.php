@@ -41,7 +41,7 @@ class AuthService
 
     private function validateCachedToken(string $token): bool
     {
-        $key = 'auth:'.hash('sha256', $token).':user';
+        $key = 'auth:'.hash('sha256', $token).':token';
 
         $data = Cache::get($key);
 
