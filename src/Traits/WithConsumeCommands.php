@@ -2,10 +2,10 @@
 
 namespace Raid\Core\Traits;
 
-use App\Services\KafkaService;
 use Carbon\Exceptions\Exception;
 use Junges\Kafka\Contracts\ConsumerMessage;
 use Junges\Kafka\Exceptions\ConsumerException;
+use Raid\Core\Services\KafkaService;
 
 trait WithConsumeCommands
 {
