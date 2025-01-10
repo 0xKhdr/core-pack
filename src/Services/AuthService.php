@@ -8,9 +8,6 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use function App\Services\auth;
-use function App\Services\config;
-use function App\Services\data_get;
 
 class AuthService
 {
