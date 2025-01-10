@@ -29,7 +29,7 @@ class AuthService
     private function validateToken(string $token): bool
     {
         $response = Http::withToken($token)->get(
-            config('services.auth.validate_token_url'),
+            config('core.auth-service.validate_token_url'),
         );
 
         if ($response->failed()) {
