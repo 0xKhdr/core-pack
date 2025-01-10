@@ -1,6 +1,3 @@
 <?php
 
-interface ConsumeCommand
-{
-
-}
+interface ConsumeCommand {}

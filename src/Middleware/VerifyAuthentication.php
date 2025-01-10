@@ -2,9 +2,10 @@
 
 namespace Raid\Core\Middleware;
 
-use Raid\Core\Services\AuthService;
 use Closure;
 use Illuminate\Http\Request;
+use Raid\Core\Services\AuthService;
+use Symfony\Component\HttpFoundation\Response;
 
 readonly class VerifyAuthentication
 {

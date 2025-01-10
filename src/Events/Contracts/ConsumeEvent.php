@@ -2,7 +2,4 @@
 
 namespace Raid\Core\Events\Contracts;
 
-interface ConsumeEvent
-{
-
-}
+interface ConsumeEvent {}
