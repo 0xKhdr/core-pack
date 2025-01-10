@@ -12,11 +12,11 @@ trait WithConsumeCommands
     protected function init(): void
     {
         $this->info(sprintf(
-            '[%s]: Init '.static::class.' with message: %s',
+            '[%s] Initiating: <fg=blue>%s</> with message: <fg=cyan>%s</>',
             now()->toDateTimeString(),
-            $this->getMessage(),
+            static::class,
+            $this->getMessage()
         ));
-
     }
 
     protected function consume(string $topic, string $event): void
