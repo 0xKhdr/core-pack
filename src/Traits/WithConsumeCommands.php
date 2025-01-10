@@ -12,7 +12,7 @@ trait WithConsumeCommands
     protected function init(): void
     {
         $this->info(sprintf(
-            'Init '. "\033[1m" . static::class . "\033[0m" .' with message: %s',
+            'Init '.static::class.' with message: %s',
             $this->getMessage(),
         ));
 
