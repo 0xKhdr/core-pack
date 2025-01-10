@@ -55,15 +55,21 @@ class AuthService
     /**
      * @throws Exception
      */
-    private function authenticate(array $data, string $guard = 'api'): Authenticatable
+    private function authenticate(array $data, ?string $guard = null): Authenticatable
     {
-        $model = config('core.auth.model');
+        $model = config('core.auth.defaults.model');
 
-        if (! $model || ! class_exists($model)) {
+        $authGuard = $guard ?: config('core.auth.defaults.guard');
+
+        if (
+            ! $model ||
+            ! $authGuard ||
+            ! class_exists($model)
+        ) {
             throw new Exception('No auth model defined in config/core.php');
         }
 
-        auth($guard)->login(new $model($data));
+        auth($authGuard)->login(new $model($data));
 
         return auth($guard)->user();
     }
