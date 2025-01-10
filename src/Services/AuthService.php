@@ -2,7 +2,6 @@
 
 namespace Raid\Core\Services;
 
-use App\Models\User;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Client\ConnectionException;
@@ -22,6 +21,7 @@ class AuthService
 
     /**
      * @throws ConnectionException
+     * @throws Exception
      */
     private function validateToken(string $token): bool
     {
@@ -36,6 +36,9 @@ class AuthService
         return (bool) $this->authenticate($response->json('user'));
     }
 
+    /**
+     * @throws Exception
+     */
     private function validateCachedToken(string $token): bool
     {
         $key = 'auth:'.hash('sha256', $token).':token';
@@ -49,10 +52,19 @@ class AuthService
         return $user && $this->authenticate($user);
     }
 
-    private function authenticate(array $data): Authenticatable
+    /**
+     * @throws Exception
+     */
+    private function authenticate(array $data, string $guard = 'api'): Authenticatable
     {
-        auth('api')->login(new User($data));
+        $model = config('core.auth.model');
 
-        return auth('api')->user();
+        if (! $model || ! class_exists($model)) {
+            throw new Exception('No auth model defined in config/core.php');
+        }
+
+        auth($guard)->login(new $model($data));
+
+        return auth($guard)->user();
     }
 }

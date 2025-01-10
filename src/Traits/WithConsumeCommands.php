@@ -9,7 +9,7 @@ use Raid\Core\Services\KafkaService;
 
 trait WithConsumeCommands
 {
-    protected function consume(string $topic, string $event): void
+    public function consume(string $topic, string $event): void
     {
         try {
             $this->start();

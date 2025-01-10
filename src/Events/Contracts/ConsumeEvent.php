@@ -2,4 +2,11 @@
 
 namespace Raid\Core\Events\Contracts;
 
-interface ConsumeEvent {}
+use Junges\Kafka\Contracts\ConsumerMessage;
+
+interface ConsumeEvent
+{
+    public function getMessage(): ConsumerMessage;
+
+    public function getBody(?string $key = null, mixed $default = null): mixed;
+}
