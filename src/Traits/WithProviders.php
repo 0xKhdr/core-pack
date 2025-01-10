@@ -6,7 +6,7 @@ trait WithProviders
 {
     protected function publishConfig(): void
     {
-        $configResources = glob(__DIR__.'/../../../config/*.php');
+        $configResources = glob(__DIR__.'/../../config/*.php');
 
         foreach ($configResources as $configPath) {
             $this->publishes([
