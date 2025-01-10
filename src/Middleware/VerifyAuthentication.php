@@ -12,7 +12,7 @@ readonly class VerifyAuthentication
         private AuthService $authService,
     ) {}
 
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next): mixed
     {
         $token = $request->bearerToken();
 
