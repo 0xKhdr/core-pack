@@ -9,25 +9,25 @@ use Raid\Core\Services\KafkaService;
 
 trait WithConsumeCommands
 {
-    protected function init(): void
-    {
-        $this->info(sprintf(
-            '[%s] Initiating: <fg=blue>%s</> with message: <fg=cyan>%s</>',
-            now()->toDateTimeString(),
-            static::class,
-            $this->getMessage()
-        ));
-    }
-
     protected function consume(string $topic, string $event): void
     {
         try {
-            $this->init();
+            $this->start();
             $this->consumeTopic($topic, $event);
 
         } catch (Exception|ConsumerException $e) {
             $this->error('Error: '.$e->getMessage());
         }
+    }
+
+    private function start(): void
+    {
+        $this->info(sprintf(
+            '[%s] Initiating: %s with message: %s',
+            now()->toDateTimeString(),
+            static::class,
+            $this->getStartMessage(),
+        ));
     }
 
     /**
@@ -40,15 +40,17 @@ trait WithConsumeCommands
             function (ConsumerMessage $message) use ($event) {
                 event(new $event($message));
 
-                $this->finished(data_get($message->getBody(), 'postId'));
+                $this->finish($message->getBody());
             });
     }
 
-    protected function finished(string $postId): void
+    private function finish(mixed $body): void
     {
         $this->info(sprintf(
-            'Consume comment changed event received for post: %s',
-            $postId,
+            '[%s] Consumed: %s with message: %s',
+            now()->toDateTimeString(),
+            static::class,
+            $this->getFinishMessage($body),
         ));
     }
 }
