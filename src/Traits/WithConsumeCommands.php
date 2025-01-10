@@ -11,7 +11,11 @@ trait WithConsumeCommands
 {
     protected function init(): void
     {
-        $this->info($this->getMessage());
+        $this->info(sprintf(
+            'Init '. "\033[1m" . static::class . "\033[0m" .' with message: %s',
+            $this->getMessage(),
+        ));
+
     }
 
     protected function consume(string $topic, string $event): void
