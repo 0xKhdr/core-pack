@@ -38,6 +38,10 @@ trait WithConsumeCommands
         KafkaService::new()->consume(
             [$topic],
             function (ConsumerMessage $message) use ($event) {
+                if (! $message->getTimestamp()) {
+                    return;
+                }
+
                 event(new $event($message));
 
                 $this->finish($message->getBody());
