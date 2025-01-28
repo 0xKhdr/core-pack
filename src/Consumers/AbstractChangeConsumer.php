@@ -18,6 +18,12 @@ abstract class AbstractChangeConsumer implements ChangeConsumer
 
     protected readonly ?array $after;
 
+    abstract protected function create(): void;
+
+    abstract protected function update(): void;
+
+    abstract protected function delete(): void;
+
     public function resolveChange(ConsumerMessage $message): void
     {
         try {
