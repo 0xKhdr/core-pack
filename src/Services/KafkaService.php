@@ -7,6 +7,7 @@ use Exception;
 use Junges\Kafka\Exceptions\ConsumerException;
 use Junges\Kafka\Facades\Kafka;
 use Junges\Kafka\Message\Message;
+use Raid\Core\Deserializers\JsonDeserializer;
 
 class KafkaService
 {
@@ -38,6 +39,7 @@ class KafkaService
         Kafka::consumer($topics)
             ->withBrokers(config('kafka.brokers'))
             ->withAutoCommit()
+            ->usingDeserializer(new JsonDeserializer())
             ->withHandler($handler)
             ->build()
             ->consume();
