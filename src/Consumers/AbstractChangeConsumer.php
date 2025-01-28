@@ -2,12 +2,12 @@
 
 namespace Raid\Core\Consumers;
 
-use App\Enums\KafkaChange;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Junges\Kafka\Contracts\ConsumerMessage;
 use Raid\Core\Consumers\Contracts\ChangeConsumer;
+use Raid\Core\Enums\KafkaChange;
 use Throwable;
 
 abstract class AbstractChangeConsumer implements ChangeConsumer
