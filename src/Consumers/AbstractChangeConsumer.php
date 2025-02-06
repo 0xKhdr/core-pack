@@ -24,6 +24,12 @@ abstract class AbstractChangeConsumer implements ChangeConsumer
 
     abstract protected function delete(): void;
 
+
+    protected function read(): void
+    {
+
+    }
+
     public function resolveChange(ConsumerMessage $message): void
     {
         try {
@@ -45,6 +51,7 @@ abstract class AbstractChangeConsumer implements ChangeConsumer
     {
         match ($this->getOperation()) {
             KafkaChange::CREATE => $this->create(),
+            KafkaChange::READ => $this->read(),
             KafkaChange::UPDATE => $this->update(),
             KafkaChange::DELETE => $this->delete(),
         };
